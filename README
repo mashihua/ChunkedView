@@ -1,0 +1,30 @@
+
+Copyright 2011 Shihua Ma
+
+This is a  small, useful ruby script that help you to visual you chunked encoding of http response in your mind.
+
+=========================================
+
+Example:
+
+require "chunkedview"
+
+c = ChunkedView.new
+c.get "http://www.google.com/search?q=twitter",true
+
+puts "Response code: #{c.code}"
+puts "Response chuncked length: #{c.chunk.length}"
+puts "Response html length: #{c.body.join('').length}"
+puts "Compressed html length: #{c.chunk.join('').length}"
+puts "Response headers:"
+
+c.headers.each{|k,v|
+  puts "\t#{k}: #{v}"
+}
+
+puts "Response Bodys:"
+
+#display html
+c.body.each{|k|
+  print k
+}
